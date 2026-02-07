@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddArticle from './AddArticle';
 import ArticleList from './ArticleList';
 
@@ -7,7 +7,7 @@ const ArticleManager = () => {
         { id: 1, title: 'First Article', summary: 'This is a great read.' }
     ]);
     const [title, setTitle] = useState('');
-    const [summary, setSummary] = useSummary('');
+    const [summary, setSummary] = useState('');
 
     const onClickAdd = () => {
         if (!title || !summary) return;

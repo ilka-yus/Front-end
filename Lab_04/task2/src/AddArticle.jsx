@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddArticle = ({ name, title, summary, onChangeTitle, onChangeSummary, onClicked }) => (
+const AddArticle = ({ name, title, summary, onChangeTitle, onChangeSummary, onClickAdd }) => (
     <section>
         <h3>{name}</h3>
         <input

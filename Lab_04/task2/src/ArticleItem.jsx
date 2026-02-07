@@ -9,7 +9,7 @@ const ArticleItem = ({ article, onClickRemove }) => {
                 <span style={{ cursor: 'ponter', fontWeight: 'bold' }} onClick={() => setIsOpened(!isOpened)}>
                     {article.title}
                 </span>
-                <button onClick={() => onClickRemove(article.id)}>+</button>
+                <button onClick={() => onClickRemove(article.id)}>-</button>
             </header>
 
             {isOpened && <p>{article.summary}</p>}
