@@ -9,7 +9,6 @@ function App() {
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: '100vh',
-      backgroundColor: '#f5f5f5'
     }}>
       <RegistrationForm />
     </div>
