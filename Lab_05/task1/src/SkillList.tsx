@@ -8,7 +8,7 @@ interface SkillListProps {
 const getLevelColor = (level: SkillLevel): string => {
     switch (level) {
         case 'Beginner': return 'gray';
-        case 'Intermediate': return 'blue';
+        case 'Intermediate': return 'red';
         case 'Expert': return 'green';
         default: return 'black';
     }
