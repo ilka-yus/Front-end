@@ -5,8 +5,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
-
-const Courses = () => <h2>Courses Page</h2>;
+import Courses from './pages/Courses';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

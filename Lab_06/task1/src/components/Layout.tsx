@@ -1,6 +1,6 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from "react-router-dom";
 
-export default function Layout() {
+function Layout() {
     return (
         <div style={{ padding: '20px' }}>
             <nav style={{ display: 'flex', gap: '15px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
@@ -19,3 +19,5 @@ export default function Layout() {
         </div>
     );
 }
+
+export default Layout;

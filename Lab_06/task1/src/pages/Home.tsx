@@ -1,3 +1,7 @@
-export default function Home() {
-    return <h1>Welcome to the Student Portal</h1>;
-}
+const Home = () => (
+    <div>
+        <h1>Welcome to the Student Portal</h1>
+    </div>
+);
+
+export default Home;
