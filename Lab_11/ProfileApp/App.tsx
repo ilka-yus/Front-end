@@ -9,6 +9,7 @@ export default function App() {
         <ProfileCard
           name='Иван Иванов'
           role='Mobile Developer'
+          avatar='https://randomuser.me/api/portraits/men/27.jpg'
           bio='Люблю React Native и чистый код.'
         />
         <ContactSection />
