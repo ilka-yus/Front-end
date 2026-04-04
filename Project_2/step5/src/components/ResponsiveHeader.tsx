@@ -3,13 +3,13 @@ import {
     View,
     Text,
     StyleSheet,
-    SafeAreaView,
     useWindowDimensions,
     TouchableOpacity,
     Platform,
     StatusBar
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// ИСПРАВЛЕНО: Импортируем SafeAreaView из context, а не из react-native
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface ResponsiveHeaderProps {
     title: string;
@@ -28,61 +28,51 @@ export function ResponsiveHeader({
     leftAction,
     rightAction,
 }: ResponsiveHeaderProps) {
-    const insets = useSafeAreaInsets();
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
     const isTablet = width >= 768 || isLandscape;
 
     return (
-        <SafeAreaView style={[styles.safeArea, { paddingTop: 0 }]}>
+        // edges={['top']} заставляет фон шапки заходить под статус-бар
+        <SafeAreaView edges={['top']} style={styles.safeArea}>
             <StatusBar
                 barStyle="light-content"
                 backgroundColor="#0066cc"
-                translucent={Platform.OS === 'android'}
+                translucent={true}
             />
-            <View
-              style={[
-                styles.header,
-                {
-                    paddingTop: Platform.OS === 'android' ? insets.top : 0,
-                    height: 56 + (Platform.OS === 'android' ? insets.top : 0),
-                }
-              ]}
-            >
-                <View style={styles.headerContent}>
-                    <View style={styles.headerLeft}>
-                        {leftAction && (
-                            <TouchableOpacity
-                              style={styles.headerButton}
-                              onPress={leftAction.onPress}
-                            >
-                                <Text style={styles.headerIcon}>{leftAction.icon}</Text>
-                            </TouchableOpacity>
-                        )}
-                    </View>
+            <View style={styles.headerContent}>
+                <View style={styles.headerLeft}>
+                    {leftAction && (
+                        <TouchableOpacity
+                            style={styles.headerButton}
+                            onPress={leftAction.onPress}
+                        >
+                            <Text style={styles.headerIcon}>{leftAction.icon}</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
 
-                    <View style={styles.headerCenter}>
-                        <Text
-                          style={[
+                <View style={styles.headerCenter}>
+                    <Text
+                        style={[
                             styles.headerTitle,
                             isTablet && styles.headerTitleTablet
-                          ]}
-                          numberOfLines={1}
-                        >
-                            {title}
-                        </Text>
-                    </View>
+                        ]}
+                        numberOfLines={1}
+                    >
+                        {title}
+                    </Text>
+                </View>
 
-                    <View style={styles.headerRight}>
-                        {rightAction && (
-                            <TouchableOpacity
-                              style={styles.headerButton}
-                              onPress={rightAction.onPress}
-                            >
-                                <Text style={styles.headerIcon}>{rightAction.icon}</Text>
-                            </TouchableOpacity>
-                        )}
-                    </View>
+                <View style={styles.headerRight}>
+                    {rightAction && (
+                        <TouchableOpacity
+                            style={styles.headerButton}
+                            onPress={rightAction.onPress}
+                        >
+                            <Text style={styles.headerIcon}>{rightAction.icon}</Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </View>
         </SafeAreaView>
@@ -94,17 +84,11 @@ interface ResponsiveContainerProps {
 }
 
 export function ResponsiveContainer({ children }: ResponsiveContainerProps) {
-    const insets = useSafeAreaInsets();
     const { width } = useWindowDimensions();
     const isTablet = width >= 768;
 
     return (
-        <View
-          style={[
-            styles.container,
-            { paddingTop: insets.top + 56 }
-          ]}
-        >
+        <View style={styles.container}>
             {isTablet ? (
                 <View style={styles.tabletContainer}>
                     <View style={styles.tabletSidebar}>
@@ -121,33 +105,30 @@ export function ResponsiveContainer({ children }: ResponsiveContainerProps) {
     );
 }
 
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
     safeArea: {
         backgroundColor: '#0066cc',
-    },
-    header: {
-        backgroundColor: '#0066cc',
-        borderBottomWidth: 0,
+        // Тень для отделения шапки
         elevation: 4,
         shadowColor: '#000',
-        shadowOffset: {width:0,height:2},
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
+        zIndex: 1000,
     },
     headerContent: {
-        flex:1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 8,
-        height: 56,
+        height: 56, // Фиксированная высота контента шапки
     },
     headerLeft: {
         width: 48,
         alignItems: 'flex-start',
     },
     headerCenter: {
-        flex:1,
+        flex: 1,
         alignItems: 'center',
     },
     headerRight: {
@@ -195,6 +176,5 @@ const styles= StyleSheet.create({
     },
     tabletContent: {
         flex: 1,
-        padding: 20,
     },
 });
