@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ResponsiveContainer, ResponsiveHeader } from './src/components/ResponsiveHeader';
+import { AdaptiveLayout, FeatureCard } from './src/components/AdaptiveLayout';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <ResponsiveContainer>
+        <ResponsiveHeader title="My Stylish App" />
+        <AdaptiveLayout 
+          content={
+            <>
+              <FeatureCard 
+                icon="📱" 
+                title="Responsive" 
+                description="Works on all devices" 
+              />
+              <FeatureCard 
+                icon="🎨" 
+                title="Flexbox" 
+                description="Modern layout system" 
+                variant="secondary"
+              />
+            </>
+          } 
+        />
+      </ResponsiveContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
